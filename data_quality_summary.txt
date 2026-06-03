@@ -1,0 +1,19 @@
+DATA QUALITY SUMMARY
+
+1. Successfully loaded all 10 provided datasets.
+
+2. Dataset structure verified using shape() and head().
+
+3. Fund master data explored successfully.
+
+4. Unique fund houses, categories, sub-categories, and risk categories identified.
+
+5. Live NAV data fetched successfully using MFAPI.
+
+6. NAV data fetched for 5 key mutual fund schemes.
+
+7. AMFI code validation completed.
+
+8. No missing AMFI codes found between fund_master and nav_history.
+
+9. Data appears consistent and ready for further analysis.

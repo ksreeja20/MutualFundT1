@@ -20,10 +20,18 @@ for file in files:
 
     dataframes[file] = df
 
-    print("\n--------------------------")
-    print("FILE:", file)
-    print("SHAPE:", df.shape)
-    print(df.head())
+print("\n--------------------------")
+print("FILE:", file)
+
+print("SHAPE:")
+print(df.shape)
+
+print("\nDTYPES:")
+print(df.dtypes)
+
+print("\nHEAD:")
+print(df.head())
+
 
 
 # =========================
@@ -42,11 +50,17 @@ for file in dataframes:
 # STEP 3: CLEAN COLUMN NAMES
 # =========================
 
-fund_df.columns = fund_df.columns.str.strip().str.lower().str.replace(" ", "_")
+if fund_df is not None:
+    fund_df.columns = (
+        fund_df.columns
+        .str.strip()
+        .str.lower()
+        .str.replace(" ", "_")
+    )
 
 
 # =========================
-# STEP 4: ANALYSIS
+# STEP 4: FUND MASTER ANALYSIS
 # =========================
 
 if fund_df is not None:
@@ -70,5 +84,20 @@ if fund_df is not None:
     print("\nRISK CATEGORIES:")
     print(fund_df["risk_category"].unique())
 
+    print("\nAMFI CODE SAMPLE:")
+    print(fund_df["amfi_code"].head())
+
 else:
     print("Fund master file not found")
+    print("\n==============================")
+print("AMFI CODE VALIDATION")
+print("==============================")
+
+nav_df = dataframes["02_nav_history.csv"]
+
+fund_codes = set(fund_df["amfi_code"])
+nav_codes = set(nav_df["amfi_code"])
+
+missing_codes = fund_codes - nav_codes
+
+print("Missing Codes:", missing_codes)

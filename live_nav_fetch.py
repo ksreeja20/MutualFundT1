@@ -1,18 +1,18 @@
 import requests
 import pandas as pd
 
-url = "https://api.mfapi.in/mf/125497"
+scheme_codes = [119551, 120503, 118632, 119092, 120841]
 
-response = requests.get(url)
+for code in scheme_codes:
+    url = f"https://api.mfapi.in/mf/{code}"
 
-data = response.json()
+    response = requests.get(url)
+    data = response.json()
 
-nav_data = data["data"]
+    nav_data = data["data"]
 
-df = pd.DataFrame(nav_data)
+    df = pd.DataFrame(nav_data)
 
-print(df.head())
+    df.to_csv(f"data/raw/{code}_nav.csv", index=False)
 
-df.to_csv("data/raw/sbi_small_cap_nav.csv", index=False)
-
-print("CSV file saved successfully!")
+    print(f"{code} CSV file saved successfully!")
